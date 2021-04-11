@@ -93,7 +93,25 @@ router.post('/register',
         }
     })
 
-router.get('/bookshelf', async (req, res) => { res.json(req.books) })
+router.get('/bookshelf', async (req, res) => { res.json(req.books) }) //for all
+
+router.post('/addbook', async (req, res) => {   //for login user
+    let newBook = {}
+    newBook.id = (pets.list.length) ? pets.list[pets.list.length - 1].id + 1 : 1
+    newBook.name = req.body.name
+    newBook.author = req.body.author
+    newBook.page = req.body.page
+    newBook.stock = req.body.stock
+    books = { "list": [...books.list, newBook] }
+    res.json(req.books)
+})
+
+router.put('/borrow//:book_id', async (req, res) => {
+    const book_id = req.params.book_id
+    const id = book.list.findIndex(item => +item.id === +book_id)
+    if (books.list[id].stock > 0)
+        books.list[id].stock --
+})
 
 
 
