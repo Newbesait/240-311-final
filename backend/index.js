@@ -110,7 +110,7 @@ router.put('/borrow//:book_id', async (req, res) => {
     const book_id = req.params.book_id
     const id = book.list.findIndex(item => +item.id === +book_id)
     if (books.list[id].stock > 0)
-        books.list[id].stock --
+        books.list[id].stock--
 })
 
 
