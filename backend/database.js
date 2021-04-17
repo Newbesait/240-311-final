@@ -6,18 +6,13 @@ let users = {
         
     ]
 }
-let books = {
-    list: [
-        { id: 1, name: "Math", author:"Aj.Keng", page:200 ,stock:1 },
-        { id: 2, name: "Novel", author:"Jhon", page:500 ,stock:0  }
-    ]
-}
+
 
 const SECRET = 'your_jwt_secret'
 const NOT_FOUND = -1
 
 exports.users = users 
-exports.books = books 
+
 
 exports.SECRET = SECRET
 exports.NOT_FOUND = NOT_FOUND
@@ -26,9 +21,7 @@ exports.setUsers = function(_users) {
   users = _users;
 }
 
-exports.setStudent = function(_books) { 
-    books = _books;
-  }
+
   
 
 // === validate username/password ===

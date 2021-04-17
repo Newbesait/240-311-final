@@ -10,8 +10,6 @@ const bcrypt = require('bcrypt')
 
 const db = require('./database.js')
 let users = db.users
-let books = db.books
-
 require('./passport.js')
 
 const router = require('express').Router(),
@@ -93,11 +91,20 @@ router.post('/register',
         }
     })
 
-router.get('/bookshelf', async (req, res) => { res.json(req.books) }) //for all
+
+    let books = {
+        list: [
+            { id: 1, name: "Math", author:"Aj.Keng", page:200 ,stock:1 },
+            { id: 2, name: "Novel", author:"Jhon", page:500 ,stock:0  }
+        ]
+    }
+
+
+router.get('/bookshelf', async (req, res) => { res.json(books.list) }) //for all
 
 router.post('/addbook', async (req, res) => {//for login user
     let newBook = {}
-    newBook.id = (pets.list.length) ? pets.list[pets.list.length - 1].id + 1 : 1
+    newBook.id = (books.list.length) ? books.list[books.list.length - 1].id + 1 : 1
     newBook.name = req.body.name
     newBook.author = req.body.author
     newBook.page = req.body.page
