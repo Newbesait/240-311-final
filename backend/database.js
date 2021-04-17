@@ -9,8 +9,7 @@ let users = {
 let books = {
     list: [
         { id: 1, name: "Math", author:"Aj.Keng", page:200 ,stock:1 },
-
-        { id: 2, name: "Novel", author:"Jhon", page:500 ,stock:0}
+        { id: 2, name: "Novel", author:"Jhon", page:500 ,stock:0  }
     ]
 }
 
