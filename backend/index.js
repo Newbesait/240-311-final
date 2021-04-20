@@ -94,8 +94,8 @@ router.post('/register',
 
     let books = {
         list: [
-            { id: 1, name: "Math", author:"Aj.Keng", page:200 ,stock:1 },
-            { id: 2, name: "Novel", author:"Jhon", page:500 ,stock:0  }
+            { id: 1, name: "Math", author:"Aj.Keng", page:200 ,stock:1,image:"https://e7.pngegg.com/pngimages/475/947/png-clipart-the-math-book-mathematics-textbook-textbooks-s-angle-class-thumbnail.png", },
+            { id: 2, name: "Novel", author:"Jhon", page:500 ,stock:0,image:"https://images-na.ssl-images-amazon.com/images/I/51W+Fdn45+L._SX329_BO1,204,203,200_.jpg",  }
         ]
     }
 

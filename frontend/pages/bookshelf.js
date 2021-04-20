@@ -7,17 +7,18 @@ import Navbar from "../components/navbar";
 import config from '../config/config'
 
 
-const URL = config.URL+"/bookshelf";
+const URL = config.URL + "/bookshelf";
 
 const fetcher = url => axios.get(url).then(res => res.data)
 const shelf = () => {
-    const [books, setBooks] = useState({ list: [{ id: 1, name: "Math", author:"Aj.Keng", page:200 ,stock:1  },] })
+    const [books, setBooks] = useState({ list: [{ id: 1, name: "Math", author: "Aj.Keng", page: 200, stock: 1, image: "aa" },] })
     const [book, setBook] = useState({})
     const [id, setId] = useState(0)
     const [name, setName] = useState('')
     const [author, setAuthor] = useState('')
     const [page, setPage] = useState(0)
     const [stock, setStock] = useState(0)
+    const [image, setImage] = useState('')
 
     useEffect(() => { getBooks() }, [])
 
@@ -41,10 +42,26 @@ const shelf = () => {
             return <li> No Book</li>
     }
 
+    const showImage = () => {
+        if (books.image !== "nocover"){
+            const cover = books.image
+            return books.map((books, index) =>
+                <li className={styles.listItem} key={index}>
+                
+                    <img src={cover} alt="Trulli" width="500" height="333"></img>
+                </li>
+            )}
+        else
+            return <li> No cover</li>
+
+    }
+
     return (<div className={styles.container}>
         <Navbar />
         <h1>Books shop</h1>
-        <ul className={styles.list} >{printBooks()}</ul>
+        <ul className={styles.list} >
+            {showImage()}
+            {printBooks()}</ul>
     </div>
     )
 
