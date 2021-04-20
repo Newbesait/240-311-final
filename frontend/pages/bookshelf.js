@@ -32,45 +32,28 @@ const shelf = () => {
         if (books && books.length)
             return books.map((books, index) =>
                 <li className={styles.listItem} key={index}>
-                    <h6>Bookname:{(books) ? books.name : '-'}</h6>
-                    <h6>author:{(books) ? books.author : '-'}</h6>
-                    <h6>page:{(books) ? books.page : 0}</h6>
-                    <h6>stock:{(books) ? books.stock : 0}</h6>
+                    <img src={books.image} alt="Trulli" width="200" height="250"></img><br />
+                    Bookname:{(books) ? books.name : '-'}<br />
+                    Author:{(books) ? books.author : '-'}<br />
+                    Page:{(books) ? books.page : 0}<br />
+                    Stock:{(books) ? books.stock : 0}<br />
                 </li>
             )
         else
             return <li> No Book</li>
     }
-
-    const showImage = () => {
-        if (books.image !== "nocover"){
-            const cover = books.image
-            return books.map((books, index) =>
-                <li className={styles.listItem} key={index}>
-                
-                    <img src={cover} alt="Trulli" width="500" height="333"></img>
-                </li>
-            )}
-        else
-            return <li> No cover</li>
-
-    }
-
+    
     return (<div className={styles.container}>
         <Navbar />
-        <h1>Books shop</h1>
+        <h1>library</h1>
         <ul className={styles.list} >
-            {showImage()}
-            {printBooks()}</ul>
+            {printBooks()}
+        </ul>
     </div>
     )
 
 
 }
-
-
-
-
 
 export default shelf
 
