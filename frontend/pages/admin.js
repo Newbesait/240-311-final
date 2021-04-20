@@ -30,14 +30,14 @@ const admin = () => {
 
     const profileUser = async () => {
         try {
-           console.log('token: ', token)
+        //    console.log('token: ', token)
           const users = await axios.get(`${config.URL}/profile`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-           console.log('user: ', users.data)
+        //    console.log('user: ', users.data)
           setUser(users.data);
         } catch (e) {
-          console.log(e);
+        //   console.log(e);
         }
       };
 
