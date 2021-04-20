@@ -23,9 +23,12 @@ const admin = () => {
     const [stock, setStock] = useState(0)
     const [image, setImage] = useState('')
 
+
     useEffect(() => {
         getBooks();
         profileUser();
+
+
     }, [])
 
     const profileUser = async () => {
@@ -40,6 +43,8 @@ const admin = () => {
         //   console.log(e);
         }
       };
+      
+
 
 
 
@@ -62,13 +67,6 @@ const admin = () => {
         else
             return <li> No Book</li>
     }
-
-
-
-
-
-
-
     return (<div className={styles.container}>
         <Navbar />
         <h1>Admin</h1>

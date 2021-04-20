@@ -13,6 +13,7 @@ export default function Register({ token }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [status, setStatus] = useState('')
+    const [admin, setAdmin] = useState(0)
 
     const profileUser = async () => {
         console.log('token: ', token)
@@ -25,7 +26,7 @@ export default function Register({ token }) {
     const register = async (req, res) => {
         try {
             let result = await axios.post(`${config.URL}/register`,
-                { username, email, password })
+                { username, email, password,admin })
             console.log('result: ', result)
             console.log('result.data:  ', result.data)
             console.log('token:  ', token)
@@ -67,6 +68,16 @@ export default function Register({ token }) {
                     placeholder="password"
                     onChange={(e) => setPassword(e.target.value)} />
             </div>
+            <div>
+                Adim?
+                </div>
+            <div>
+                <input type="checkbox" id="adright1" name="adright1" value={1} 
+                    onChange={(e) => setAdmin(e.target.value)}
+                />
+                <label for="adright1"> </label>
+            </div>
+
 
         </div>
     )

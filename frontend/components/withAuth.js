@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 const withAuth = WrappedComponent => {
+    console.log("nomal")
     const Wrapper = props => {
         const { token } = props
         const router = useRouter()
