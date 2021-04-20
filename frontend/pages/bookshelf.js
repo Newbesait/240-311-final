@@ -4,8 +4,10 @@ import axios from 'axios'
 import Head from 'next/head'
 import styles from '../styles/booksshelf.module.css'
 import Navbar from "../components/navbar";
+import config from '../config/config'
 
-const URL = "http://localhost/api/bookshelf";
+
+const URL = config.URL+"/bookshelf";
 
 const fetcher = url => axios.get(url).then(res => res.data)
 const shelf = () => {
