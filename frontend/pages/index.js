@@ -1,26 +1,92 @@
-import Head from 'next/head' 
-import Layout from '../components/layout' 
+import Head from 'next/head'
+import Layout from '../components/layout'
+import { useState } from 'react'
 import Navbar from '../components/navbar'
 import styles from '../styles/Home.module.css'
+import axios from 'axios'
+import config from '../config/config'
 
-export default function Home({ token }) {
- 
-  return (
-    <Layout>
-    <Head>
-        <title>First Page</title>
-    </Head>
-    <div className={styles.container}>
-        <Navbar />
-        <h1>Home page</h1>
-        No login required!
-    </div>
-</Layout>
-  )
+export default function Login({ token }) {
+
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [status, setStatus] = useState('')
+
+    const login = async (req, res) => {
+        try {
+            let result = await axios.post(`${config.URL}/login`,
+                { username, password },
+                { withCredentials: true })
+            console.log('result: ', result)
+            console.log('result.data:  ', result.data)
+            console.log('token:  ', token)
+            setStatus(result.status + ': ' + result.data.user.username)
+        }
+        catch (e) {
+            console.log('error: ', JSON.stringify(e.response))
+            setStatus(JSON.stringify(e.response).substring(0, 80) + "...")
+        }
+    }
+
+    const loginForm = () => (
+        <div className={styles.gridContainer}>
+            <div>
+                Username:
+            </div>
+            <div>
+                <input type="text"
+                    name="username"
+                    placeholder="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </div>
+            <div>
+                Password:
+            </div>
+            <div>
+                <input type="password"
+                    name="password"
+                    placeholder="password"
+                    onChange={(e) => setPassword(e.target.value)} />
+            </div>
+        </div>
+    )
+
+    const copyText = () => {
+        navigator.clipboard.writeText(token)
+    }
+
+    return (
+
+        <div className={styles.container}>
+            <section className={styles.sec1} id="sec-1">
+                <div className={styles.seccontainer}>
+                    <h1>Hello World</h1>
+                    <a href="#sec-2">
+                        <div className={styles.scrolldown}></div>
+                    </a>
+                </div>
+            </section>
+            <section className={styles.sec2} id="sec-2">
+                <div className={styles.seccontainer}>
+                    <Head>
+                        <title>Login</title>
+                    </Head>
+                    <div className={styles.container}>
+                        <h1>LoginJa</h1>
+                        <br />
+                        {loginForm()}
+                        <div >
+                            <button onClick={login}> Login</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+    )
 }
 
 export function getServerSideProps({ req, res }) {
-  // console.log("token from cookie: ",cookie.get("token")) 
-  // console.log('req: ', req.headers)
-  return { props: { token: req.cookies.token || "" } };
+    return { props: { token: req.cookies.token || "" } };
 }
