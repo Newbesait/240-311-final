@@ -7,6 +7,7 @@ import Navbar from "../components/navbar";
 import config from '../config/config'
 
 
+
 const URL = config.URL + "/bookshelf";
 
 const fetcher = url => axios.get(url).then(res => res.data)
@@ -43,13 +44,28 @@ const shelf = () => {
             return <li> No Book</li>
     }
     
-    return (<div className={styles.container}>
-        <Navbar />
-        <h1>library</h1>
-        <ul className={styles.list} >
-            {printBooks()}
+
+    return(
+<div className={styles.container}>
+<section className={styles.sec1}>
+  <div className={styles.container}>
+    <h1>Hello World</h1>
+    <a href="#sec-2">
+      <div className={styles.scrolldown}></div>
+    </a>
+  </div>
+</section>
+<section className={styles.sec2} id="sec-2">
+<div className={styles.container}>
+    
+         <Navbar />
+         <h1>library</h1>
+         <ul className={styles.list} >
+             {printBooks()}
         </ul>
-    </div>
+     </div>
+</section>
+</div>
     )
 
 
