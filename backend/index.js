@@ -112,6 +112,7 @@ router.post('/addbook', async (req, res) => {//for login user
     newBook.author = req.body.author
     newBook.page = req.body.page
     newBook.stock = req.body.stock
+    newBook.image = req.body.image
     books = { "list": [...books.list, newBook] }
     res.json(req.books)
 })

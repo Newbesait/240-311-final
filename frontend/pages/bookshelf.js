@@ -21,7 +21,6 @@ const shelf = () => {
     const [stock, setStock] = useState(0)
     const [image, setImage] = useState('')
 
-    useEffect(() => { getBooks() }, [])
 
     const getBooks = async () => {
         let books = await axios.get(URL)
