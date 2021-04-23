@@ -114,4 +114,15 @@
       margin: auto;
       
   }
+ 
+.h3 {
+    margin-bottom: 4px;
+}
+
+.productlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
   
