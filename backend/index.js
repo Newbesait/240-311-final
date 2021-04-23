@@ -117,21 +117,20 @@ router.post('/addbook', async (req, res) => {//for login user
     res.json(req.books)
 })
 
-router.put('/borrow/:book_id', async (req, res) => {   //for login user
+router.put('/borrow/:book_id', async (req, res) => {   
     const book_id = req.params.book_id
-    const id = book.list.findIndex(item => +item.id === +book_id)
+    const id = books.list.findIndex(item => +item.id === +book_id)
     if (books.list[id].stock > 0)
         books.list[id].stock--
         res.json(req.books)
 
 })
 
-router.put('/return/:book_id',async (req, res) => {     //for login user
+router.put('/return/:book_id',async (req, res) => {     
     const book_id = req.params.book_id
-    const id = book.list.findIndex(item => +item.id === +book_id)
+    const id = books.list.findIndex(item => +item.id === +book_id)
         books.list[id].stock++
         res.json(req.books)
-
     })
 
 

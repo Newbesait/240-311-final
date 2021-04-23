@@ -1,4 +1,8 @@
 import React from 'react';
+import config from '../config/config'
+
+
+
 
 const Product = props => {
 
@@ -7,10 +11,19 @@ const Product = props => {
     const handleBorrow = e => {
         if(props.data.stock > 0)
             props.data.stock--
+            console.log(props.data.stock)
+
     }
 
     const handleReturn = e => {
         props.data.stock++
+        console.log(props.data.stock)
+    }
+
+    const updatePet = async (id) => {
+        const result = await axios.put(`${URL}/${id}`, { id, type, age, weight, price })
+        //console.log('student id update: ', result.data)
+        getPets()
     }
 
 

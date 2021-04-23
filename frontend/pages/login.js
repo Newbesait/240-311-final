@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import { useState } from 'react'
 import Navbar from '../components/navbar'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/login.module.css'
 import axios from 'axios'
 import config from '../config/config'
 
@@ -53,30 +53,18 @@ export default function Login({ token }) {
         </div>
     )
 
-    const copyText = () => {
-        navigator.clipboard.writeText(token)
-    }
-
     return (
         <Layout>
             <Head>
                 <title>Login</title>
             </Head>
+            <Navbar />
             <div className={styles.container}>
-                <Navbar />
                 <h1>Login</h1>
-                <div><b>Token:</b> {token.substring(0, 15)}...
-                <button onClick={copyText}> Copy token </button>
-                </div>
                 <br/>
-                <div>
-                    Status:  {status}
-                </div>
                 <br />
                 {loginForm()}
-                <div>
                     <button onClick={login} >Login</button>
-                </div>
             </div>
         </Layout>
     )

@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from 'react'
+import MainLayout from '../layouts/MainLayout';
+import AddBookForm from '../components/AddBookForm';
+import Product from '../components/Product';
+import { Modal } from 'antd';
+import UpdateBookModal from '../components/UpdateBookModal';
 import axios from 'axios'
-//import useSWR, { mutate } from 'swr'
-import Head from 'next/head'
-import styles from '../styles/admin.module.css'
-import Navbar from "../components/navbar";
 import config from '../config/config'
-import withAuth from "../components/withAuth";
-
-
+import styles from '../styles/update.module.css'
 
 const URL = config.URL + "/bookshelf";
 
+const initProducts = [
+    {
+        id: 0,
+        name: "teat",
+        author: "Aj.Keng",
+        page: 0,
+        stock: 0,
+        image: "static/images/add_image.png",
+    }
+];
 
 const fetcher = url => axios.get(url).then(res => res.data)
-const admin = () => {
-    const [books, setBooks] = useState({ list: [{ id: 1, name: "Math", author: "Aj.Keng", page: 200, stock: 1, image: "aa" },] })
+
+let i = 0;
+
+const ProductsPage = () => {
+
+    const [books, setBooks] = useState(initProducts)
     const [book, setBook] = useState({})
     const [id, setId] = useState(0)
     const [name, setName] = useState('')
@@ -22,64 +35,70 @@ const admin = () => {
     const [page, setPage] = useState(0)
     const [stock, setStock] = useState(0)
     const [image, setImage] = useState('')
+    const [visible, setVisible] = useState(false);
 
-
-    useEffect(() => {
-        getBooks();
-        profileUser();
-
-
-    }, [])
-
-    const profileUser = async () => {
-        try {
-        //    console.log('token: ', token)
-          const users = await axios.get(`${config.URL}/profile`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-        //    console.log('user: ', users.data)
-          setUser(users.data);
-        } catch (e) {
-        //   console.log(e);
-        }
-      };
-      
-
-
-
+    useEffect(() => { getBooks() }, [])
 
     const getBooks = async () => {
         let books = await axios.get(URL)
         setBooks(books.data)
+        console.log('books:', books.data)
     }
 
-    const printBooks = () => {
-        if (books && books.length)
-            return books.map((books, index) =>
-                <li className={styles.listItem} key={index}>
-                    <img src={books.image} alt="cover" width="200" height="250"></img><br />
-                    Bookname:{(books) ? books.name : '-'}<br />
-                    Author:{(books) ? books.author : '-'}<br />
-                    Page:{(books) ? books.page : 0}<br />
-                    Stock:{(books) ? books.stock : 0}<br />
-                </li>
-            )
-        else
-            return <li> No Book</li>
+    const handleCreateBook = (data) => {
+        const newBook = { id: i++, ...data };
+        setBooks([...books, newBook]);
     }
-    return (<div className={styles.container}>
-        <Navbar />
-        <h1>Admin</h1>
-        <ul className={styles.list} >
-            {printBooks()}
-        </ul>
-    </div>
+
+    const handleUpdateBook = (id, data) => {
+        setBook({ ...data });
+        setVisible(true);
+    }
+
+    const handleDeleteBook = (id) => {
+        const filteredProducts = books.filter((book) => book.id !== id);
+        setBooks([...filteredProducts]);
+    }
+    const printBook = () => {
+        return (books.map((book, index) => (
+            <div>
+                <Product
+                    key={index}
+                    data={book}
+                    onUpdate={handleUpdateBook}
+                    onDelete={handleUpdateBook}
+                />
+                <UpdateBookModal
+                    visible={visible}
+                    onCancel={() => setVisible(false)}
+                    data={book}
+                />
+            </div>
+        ))
+
+        )
+    }
+
+    return (
+        <MainLayout>
+            <div className={styles.container}>
+                <section>
+                    <h3>Add New Book</h3>
+                    <div className={styles.addbox}>
+                    <AddBookForm onCreate={handleCreateBook} />
+                    </div>
+                </section>
+                <section>
+                    <h3>Books List</h3>
+                    <div className={styles.productlist}>
+                      
+                            {printBook()}
+                        
+                    </div>
+                </section>
+            </div>
+        </MainLayout>
     )
 }
 
-
-export default withAuth(admin);
-
-export function getServerSideProps({ req, res }) {
-    return { props: { token: req.cookies.token || "" } };
-}
+export default ProductsPage;

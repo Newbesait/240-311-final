@@ -11,6 +11,10 @@ import UpdateBookModal from '../components/UpdateBookModal';
 
 
 const URL = config.URL + "/bookshelf";
+const BORURL = config.URL + "/borrow";
+const REURL = config.URL + "/return";
+
+
 let i = 0;
 const initProducts = [
     {
@@ -24,7 +28,7 @@ const initProducts = [
 ];
 
 
-export default function Login({ token }) {
+export default function home() {
     const [books, setBooks] = useState(initProducts)
     const [book, setBook] = useState({})
     const [id, setId] = useState(0)
@@ -40,25 +44,82 @@ export default function Login({ token }) {
     const getBooks = async () => {
         let books = await axios.get(URL)
         setBooks(books.data)
-        console.log('books:', books.data)
-    }
-    const handleUpdateBook = (id, data) => {
-        setBook({ ...data });
-        setVisible(true);
+        //console.log('books:', books.data)
     }
 
+    const handleBorrow = async (id, stock) => {
+        if (stock > 0) {
+            let st = stock - 1
+            setStock(st)
+            console.log('st=' + st)
+            const result = await axios.put(`${BORURL}/${id}`, { id, stock })
+        }
+        console.log(stock)
+        getBooks()
+    }
 
+    const handleReturn = async (id, stock) => {
+        const result = await axios.put(`${REURL}/${id}`, { id, stock })
+        console.log(stock)
+        getBooks()
+    }
 
-
-    const printBook = () => {
+    const printBooks = () => {
         return (books.map((book, index) => (
             <div>
-                <Product
-                    key={index}
-                    data={book}
-                    onUpdate={handleUpdateBook}
-                    onDelete={handleUpdateBook}
-                />
+                <div className='container' key={index}>
+                    <img src={book.image} />
+                    <h4>{book.name}</h4>
+                    <small className='text-muted'>{book.author}</small>
+                    <div className='info'>
+                        <small className='page'>{book.page} Page</small>
+                        <small className='page'>{book.stock} Lefts</small>
+                    </div>
+                    <hr />
+                    <div className='action'>
+                        <button className='Borrow' onClick={() => handleBorrow(book.id, book.stock)}>Borrow</button>
+                        <button className='Return' onClick={() => handleReturn(book.id, book.stock)}>Return</button>
+
+                    </div>
+                    <style jsx>{`
+                .container {
+                    padding: 10px;
+                    border-radius: 10px;
+                    min-width: 180px;
+                    max-width: 200px;
+                    box-shadow: 0 0 6px 0px rgba(0,0,0,.15);
+                    margin: 0 10px 10px 0;
+                }
+                .info, .action {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                img {
+                    width: 100%;
+                    height: 160px;
+                }
+                .quantity, .delete {
+                    color: var(--red);
+                }
+                .price {
+                    color: var(--green-dark);
+                }
+                .Borrow {
+                    color: var(--blue);
+                    border-right: 1px solid var(--gray);
+                    width: 50%;
+                    text-align: center;
+                    cursor: pointer;
+                }
+                .Return {
+                    width: 50%;
+                    text-align: center;
+                    cursor: pointer;
+                }
+
+
+            `}</style>
+                </div>
                 <UpdateBookModal
                     visible={visible}
                     onCancel={() => setVisible(false)}
@@ -86,10 +147,10 @@ export default function Login({ token }) {
                     <Head>
                         <title>Home Page</title>
                     </Head>
-                
-                <div className={styles.productlist}>
-                    {printBook()}
-                </div>
+
+                    <div className={styles.productlist}>
+                        {printBooks()}
+                    </div>
                 </div>
             </section>
         </div>
