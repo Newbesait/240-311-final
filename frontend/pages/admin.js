@@ -57,7 +57,7 @@ const admin = () => {
         getBooks()
     }
     const handleUpdate = async (id) => {
-        const result = await axios.put(`${URLFUN}/${id}`, { id, name, author, page, stock,image })
+        const result = await axios.put(`${URLFUN}/${id}`, { id, name, author, page, stock})
         //console.log('student id update: ', result.data)
         getBooks()
     }
@@ -77,8 +77,7 @@ const admin = () => {
                     </div>
                     <hr />
                     <div className='action'>
-                    <button className='Borrow' onClick={() => handleUpdate(book.id, book.stock)}>Update</button>
-                        <button className='Return' onClick={() => handleDelete(book.id, book.stock)}>Delete</button>
+                        <button className='delete' onClick={() => handleDelete(book.id)}>Delete</button>
                     </div>
                     <style jsx>{`
                 .container {
@@ -103,17 +102,12 @@ const admin = () => {
                 .price {
                     color: var(--green-dark);
                 }
-                .Borrow {
-                    color: var(--blue);
-                    border-right: 1px solid var(--gray);
+                .delete {
                     width: 50%;
                     text-align: center;
                     cursor: pointer;
-                }
-                .Return {
-                    width: 50%;
-                    text-align: center;
-                    cursor: pointer;
+                    margin-left: 50px;
+
                 }
 
 

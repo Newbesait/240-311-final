@@ -113,7 +113,6 @@ router.route('/bookja/:book_id')
         books.list[id].author = req.body.author
         books.list[id].page = req.body.page
         books.list[id].stock = req.body.stock
-        books.list[id].image = req.body.image
         res.json(books.list)
     })
 
