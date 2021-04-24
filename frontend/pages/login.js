@@ -60,11 +60,20 @@ export default function Login({ token }) {
             </Head>
             <Navbar />
             <div className={styles.container}>
-                <h1>Login</h1>
-                <br/>
+                <div className={styles.textmain}>
+                <div className={styles.span}>
+                    <span>L</span>
+                    <span className={styles.letter}></span>
+                    <span>G</span>
+                    <span>I</span>
+                    <span>N</span>
+                    </div>
+
+                </div>
+                <br />
                 <br />
                 {loginForm()}
-                    <button onClick={login} >Login</button>
+                <button onClick={login} >Login</button>
             </div>
         </Layout>
     )

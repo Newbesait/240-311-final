@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MainLayout from '../layouts/MainLayout';
 import AddBookForm from '../components/AddBookForm';
-import Product from '../components/Product';
 import { Modal } from 'antd';
 import UpdateBookModal from '../components/UpdateBookModal';
 import axios from 'axios'
@@ -138,6 +137,9 @@ const admin = () => {
             <div className={styles.container}>
                <section>
                     <h3>Books List</h3>
+
+
+                    
                     <div className={styles.productlist}>
                             {printBook()}
                     </div>
@@ -156,8 +158,8 @@ const admin = () => {
     )
 }
 
-// export default withAuth(admin);
-export default admin;
+export default withAuth(admin);
+//  export default admin;
 
 
 export function getServerSideProps({ req, res }) {

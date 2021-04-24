@@ -6,7 +6,6 @@
     justify-content: center;
     align-items: center;
     background-image: url("../public/static/images/blueback.jpg");
-
 }
 
 .content {
@@ -38,38 +37,3 @@
     box-sizing: border-box;
     font-size: 1.2rem;
 }
-.textbox {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.texh1 {
-	font-size: 60px;
-	font-weight: 900;
-	background-color: #000;
-	color: #fff;
-	display: block;
-	padding: .5em;
-}
-.texh1:nth-child(2) {
-	position: absolute;
-	background-color: #fff;
-	color: #000;
-	clip-path: inset(-1% -1% 50% -1%); 
-}
-
-.txcontainer {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-}
-

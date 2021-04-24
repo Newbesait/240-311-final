@@ -132,7 +132,10 @@ export default function home() {
         <div className={styles.container}>
             <section className={styles.sec1} id="sec-1">
                 <div className={styles.seccontainer}>
-                    <h1>PSU Libary</h1>
+                    {/* <h1 className={styles.head}>PSU Libary</h1> */}
+                    <div className={styles.sign}>
+                        <span className={styles.fastflicker}>PS</span>U<span className={styles.flicker}>Li</span>bary
+                    </div>
                     <a href="#sec-2">
                         <div className={styles.scrolldown}></div>
                     </a>

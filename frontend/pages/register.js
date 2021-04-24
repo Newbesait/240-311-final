@@ -25,7 +25,7 @@ export default function Register({ token }) {
     const register = async (req, res) => {
         try {
             let result = await axios.post(`${config.URL}/register`,
-                { username, email, password,admin })
+                { username, email, password, admin })
             console.log('result: ', result)
             console.log('result.data:  ', result.data)
             console.log('token:  ', token)
@@ -89,9 +89,13 @@ export default function Register({ token }) {
             </Head>
             <Navbar />
             <div className={styles.container}>
-               
-                <h1>Register</h1>
-                
+
+                {/* <h1>Register</h1> */}
+                    <div className={styles.textbox}>
+                        <h1 className={styles.texh1}>Register</h1>
+                        <h1 className={styles.texh1}>Register</h1>
+                    </div>
+
                 <div className={styles.content}>
                     {registerForm()}
                 </div>
