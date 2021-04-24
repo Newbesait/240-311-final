@@ -1,12 +1,9 @@
 import Head from 'next/head'
-import Layout from '../components/layout'
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/navbar'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import config from '../config/config'
-import Product from '../components/homeproduct';
-import MainLayout from '../layouts/MainLayout';
 import UpdateBookModal from '../components/UpdateBookModal';
 
 

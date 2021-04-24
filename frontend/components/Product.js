@@ -19,8 +19,8 @@ const Product = props => {
             <h4>{name}</h4>
             <small className='text-muted'>{author}</small>
             <div className='info'>
-                <small className='quantity'>{page} Lefts</small>
-                <small className='price'>{stock} Baht</small>
+                <small className='quantity'>{page} Pgae</small>
+                <small className='price'>{stock} Left</small>
             </div>
             <hr />
             <div className='action'>

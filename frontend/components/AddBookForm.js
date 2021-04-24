@@ -3,7 +3,9 @@ import Button from './Button';
 import config from '../config/config'
 import axios from 'axios'
 
-const emptyImageUrl = '/static/images/add_image.png';
+const addImageUrl = '/static/images/add_image.png';
+const emptyImageUrl = '/static/images/noim.png';
+
 const URL = config.URL + "/addbook";
 
 const AddProductForm = props => {
@@ -14,6 +16,7 @@ const AddProductForm = props => {
     const [page, setPage] = useState(0)
     const [stock, setStock] = useState(0)
     const [image, setImage] = useState(emptyImageUrl)
+    const [buttonimage,setButton] = useState(addImageUrl)
 
 
     const disabled = name === '' || author === ''
@@ -24,6 +27,7 @@ const AddProductForm = props => {
 
         reader.onload = (e) => {
             setImage(e.target.result)
+            setButton(e.target.result)
         }
 
         if (file)
@@ -33,6 +37,8 @@ const AddProductForm = props => {
     const handleCreate = e => {
         props.onCreate && props.onCreate({ name, author, page, stock, image })
         {addBook(name, author, page, stock, image)}
+        setButton(addImageUrl)
+
     }
 
     const addBook = async (name, author, page, stock, image) => {
@@ -45,11 +51,11 @@ const AddProductForm = props => {
         <div className='container'>
             <label className='form-control'>
                 <p>Name</p>
-                <input type='text' placeholder='Product name' value={name} onChange={(e) => setName(e.target.value)} />
+                <input type='text' placeholder='Book Name' value={name} onChange={(e) => setName(e.target.value)} />
             </label>
             <label className='form-control'>
                 <p>Author</p>
-                <textarea value={author} placeholder='Product author' onChange={(e) => setAuthor(e.target.value)} />
+                <input value={author} placeholder='Author Name' onChange={(e) => setAuthor(e.target.value)} />
             </label>
             <label className='form-control'>
                 <p>Page</p>
@@ -60,7 +66,7 @@ const AddProductForm = props => {
                 <input type='text' value={stock} onChange={(e) => setStock(e.target.value)} />
             </label>
             <label className='form-control'>
-                <img className='image' src={image} />
+                <img className='image' src={buttonimage} />
                 <input className='input-file' type='file' onChange={handleChangeImage} />
             </label>
             <Button onClick={handleCreate} disabled={disabled}>Create</Button>
@@ -70,6 +76,8 @@ const AddProductForm = props => {
                     border: 1px solid var(--gray-light2);
                     border-radius: 6px;
                     max-width: 350px;
+                    margin-left: 500px;
+
                 }
                 input, textarea {
                     border: 1px solid var(--gray-light2);

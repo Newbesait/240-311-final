@@ -105,6 +105,26 @@ router.post('/register',
 
 router.get('/bookshelf', async (req, res) => { res.json(books.list) }) //for all
 
+router.route('/bookja/:book_id')
+    .put((req, res) => {
+        const book_id = req.params.book_id
+        const id = books.list.findIndex(item => +item.id === +book_id)
+        books.list[id].name = req.body.name
+        books.list[id].author = req.body.author
+        books.list[id].page = req.body.page
+        books.list[id].stock = req.body.stock
+        books.list[id].image = req.body.image
+        res.json(books.list)
+    })
+
+    .delete((req, res) => {
+        const book_id = req.params.book_id
+       // console.log('bearId: ',book_id)
+        books.list = books.list.filter(item => +item.id !== +book_id)
+        res.json(books)
+    })
+
+
 router.post('/addbook', async (req, res) => {//for login user
     let newBook = {}
     newBook.id = (books.list.length) ? books.list[books.list.length - 1].id + 1 : 1
